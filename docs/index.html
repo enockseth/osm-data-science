@@ -12146,8 +12146,8 @@ a.anchor-link {
    &#39;type&#39;: &#39;count&#39;}],
  &#39;generator&#39;: &#39;Overpass API 0.7.55.4 3079d8ea&#39;,
  &#39;osm3s&#39;: {&#39;copyright&#39;: &#39;The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.&#39;,
-  &#39;timestamp_areas_base&#39;: &#39;2018-10-09T14:33:02Z&#39;,
-  &#39;timestamp_osm_base&#39;: &#39;2018-10-09T14:56:03Z&#39;},
+  &#39;timestamp_areas_base&#39;: &#39;2018-10-09T15:50:02Z&#39;,
+  &#39;timestamp_osm_base&#39;: &#39;2018-10-09T16:31:02Z&#39;},
  &#39;version&#39;: 0.6}</pre>
 </div>
 
@@ -12206,12 +12206,12 @@ a.anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Create-a-Table">Create a Table<a class="anchor-link" href="#Create-a-Table">&#182;</a></h2>
-<pre><code>CREATE TABLE osm_boundaries (
+<pre><code>CREATE TABLE osm_amenities (
     osm_id BIGINT PRIMARY KEY,
     country_code VARCHAR(2), 
     amenity INTEGER,
     name VARCHAR,
-    polygon GEOGRAPHY);</code></pre>
+    geom GEOGRAPHY);</code></pre>
 
 </div>
 </div>
@@ -12421,7 +12421,8 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_counts</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;amenity&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Transform our data</span>
+<span class="n">df_counts</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;amenity&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="n">df_counts</span> <span class="o">=</span> <span class="n">df_counts</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;amenity&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;osm_id&#39;</span><span class="p">)</span>
 <span class="n">df_counts</span> <span class="o">=</span> <span class="n">df_counts</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
 </pre></div>
@@ -12581,24 +12582,36 @@ a.anchor-link {
 </div>
 </div>
 </div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Logistic-Regression-Model">Logistic Regression Model<a class="anchor-link" href="#Logistic-Regression-Model">&#182;</a></h3>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LogisticRegressionCV</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
 
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
     <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Logistic-Regression">Logistic Regression<a class="anchor-link" href="#Logistic-Regression">&#182;</a></h3>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LogisticRegressionCV</span>
 
 <span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegressionCV</span><span class="p">(</span><span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -12614,7 +12627,7 @@ a.anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[15]:</div>
+<div class="prompt output_prompt">Out[16]:</div>
 
 
 
@@ -12634,7 +12647,7 @@ a.anchor-link {
 </div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training score : </span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)))</span>
@@ -12675,10 +12688,12 @@ Testing score  : 0.8293
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gdf_AT</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;country_code&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;AT&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get feature vectors</span>
+<span class="n">gdf_AT</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;country_code&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;AT&#39;</span><span class="p">]</span>
+
 <span class="n">X_AT</span> <span class="o">=</span> <span class="n">gdf_AT</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;parking&#39;</span><span class="p">:</span><span class="s1">&#39;veterinary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
 </pre></div>
 
@@ -12687,13 +12702,22 @@ Testing score  : 0.8293
 </div>
 
 </div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Calculate-Probabilites-of-being-classified-as-French">Calculate Probabilites of being classified as French<a class="anchor-link" href="#Calculate-Probabilites-of-being-classified-as-French">&#182;</a></h3>
+</div>
+</div>
+</div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">city</span><span class="p">,</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">proba</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">gdf_AT</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">],</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_AT</span><span class="p">),</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_AT</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:12s}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">,  </span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">city</span><span class="p">,</span> <span class="s1">&#39;German&#39;</span> <span class="k">if</span> <span class="n">prediction</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;French&#39;</span><span class="p">,</span> <span class="n">proba</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">city</span><span class="p">,</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">probability</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">gdf_AT</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">],</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_AT</span><span class="p">),</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_AT</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]):</span>
+    <span class="n">prediction_label</span> <span class="o">=</span> <span class="s1">&#39;German&#39;</span> <span class="k">if</span> <span class="n">prediction</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;French&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:12s}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">,  </span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">city</span><span class="p">,</span> <span class="n">prediction_label</span><span class="p">,</span> <span class="n">probability</span><span class="p">))</span>
 </pre></div>
 
 </div>
@@ -12742,7 +12766,7 @@ Klagenfurt   German,  0.464
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;frenchness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;parking&#39;</span><span class="p">:</span><span class="s1">&#39;veterinary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
@@ -12764,7 +12788,7 @@ Klagenfurt   German,  0.464
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;frenchness&#39;</span><span class="p">]</span>
@@ -12789,7 +12813,7 @@ Klagenfurt   German,  0.464
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">folium</span>
@@ -12819,7 +12843,7 @@ Klagenfurt   German,  0.464
 </div></div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">IFrame</span>
@@ -12837,7 +12861,7 @@ Klagenfurt   German,  0.464
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[22]:</div>
+<div class="prompt output_prompt">Out[23]:</div>
 
 
 
