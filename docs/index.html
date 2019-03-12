@@ -13256,40 +13256,28 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Datenakquise</li>
-</ul>
-
+<h3 id="--Datenakquise">- Datenakquise<a class="anchor-link" href="#--Datenakquise">&#182;</a></h3>
 </div>
 </div>
 </div></div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Datentransformation</li>
-</ul>
-
+<h3 id="--Datentransformation">- Datentransformation<a class="anchor-link" href="#--Datentransformation">&#182;</a></h3>
 </div>
 </div>
 </div></div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Datenanalyse</li>
-</ul>
-
+<h3 id="--Datenanalyse">- Datenanalyse<a class="anchor-link" href="#--Datenanalyse">&#182;</a></h3>
 </div>
 </div>
 </div></div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Datenvisualisierung</li>
-</ul>
-
+<h3 id="--Datenvisualisierung">- Datenvisualisierung<a class="anchor-link" href="#--Datenvisualisierung">&#182;</a></h3>
 </div>
 </div>
 </div></div></section></section><section><section>
@@ -13304,7 +13292,7 @@ a.anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Einrichtungen-(Amenities)-in-OpenStreetMap">Einrichtungen (Amenities) in OpenStreetMap<a class="anchor-link" href="#Einrichtungen-(Amenities)-in-OpenStreetMap">&#182;</a></h1><ul>
-<li>Attributes saved as key-value pairs</li>
+<li>Attribute sind als key-value pairs gespeichert</li>
 <li><a href="https://wiki.openstreetmap.org/wiki/Key:amenity">Amenity key</a></li>
 </ul>
 
@@ -13371,10 +13359,7 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Overpass-API">Overpass API<a class="anchor-link" href="#Overpass-API">&#182;</a></h1><ul>
-<li>Using the <a href="https://wiki.openstreetmap.org/wiki/Overpass_API">Overpass API</a> and the <a href="https://wiki.openstreetmap.org/wiki/Overpass_API/Overpass_QL">Overpass QL</a></li>
-</ul>
-
+<h1 id="Overpass-API">Overpass API<a class="anchor-link" href="#Overpass-API">&#182;</a></h1>
 </div>
 </div>
 </div><div class="fragment">
@@ -13434,6 +13419,61 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Daten-aus-OpenStreetMap-Dateien-Extrahieren">Daten aus OpenStreetMap Dateien Extrahieren<a class="anchor-link" href="#Daten-aus-OpenStreetMap-Dateien-Extrahieren">&#182;</a></h1><ul>
+<li>Dateien aus <a href="http://download.geofabrik.de/">Geofabrik</a> oder direkt Regionen aus OpenStreetMap exportieren</li>
+<li><a href="https://osmcode.org/osmium-tool/">Osmium Tool</a> für die Kommandozeile oder <a href="https://docs.osmcode.org/pyosmium/latest/intro.html">PyOsmium</a> mit Python</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">osmium</span>
+
+<span class="k">class</span> <span class="nc">RestaurantHandler</span><span class="p">(</span><span class="n">osmium</span><span class="o">.</span><span class="n">SimpleHandler</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">osmium</span><span class="o">.</span><span class="n">SimpleHandler</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_restaurants</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;amenity&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;restaurant&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_restaurants</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+<span class="n">handler</span> <span class="o">=</span> <span class="n">RestaurantHandler</span><span class="p">()</span>
+<span class="n">handler</span><span class="o">.</span><span class="n">apply_file</span><span class="p">(</span><span class="s1">&#39;data/liechtenstein-latest.osm.pbf&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of Restaurants: &#39;</span><span class="p">,</span> <span class="n">handler</span><span class="o">.</span><span class="n">num_restaurants</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Number of Restaurants:  45
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Datentransformation">Datentransformation<a class="anchor-link" href="#Datentransformation">&#182;</a></h1>
 </div>
 </div>
@@ -13442,7 +13482,7 @@ a.anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="GeoPandas">GeoPandas<a class="anchor-link" href="#GeoPandas">&#182;</a></h1><ul>
-<li><a href="https://pandas.pydata.org/">Pandas</a> Dataframes mit einer geometrie spalte</li>
+<li><a href="https://pandas.pydata.org/">Pandas</a> Dataframes mit einer Geometrie Spalte</li>
 <li>Geospatial extension für Pandas</li>
 <li>Verwendet <a href="http://toblerity.org/shapely/manual.html">shapely</a> für geometrische operationen und <a href="https://github.com/Toblerity/Fiona">fiona</a> für Dateizugriff</li>
 <li>Visualisierung verwendet <a href="https://bitbucket.org/sgillies/descartes/">descartes</a> und <a href="https://matplotlib.org/">matplotlib</a></li>
@@ -13466,10 +13506,14 @@ a.anchor-link {
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">psycopg2</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
-<span class="k">with</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;osm_data_science_db&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span><span class="p">,</span> 
+<span class="k">with</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;osm_data_science&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span><span class="p">,</span> 
                       <span class="n">password</span><span class="o">=</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
-    <span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_postgis</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT * FROM osm_amenities_areas&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">geom_col</span><span class="o">=</span><span class="s1">&#39;geom&#39;</span><span class="p">)</span>
-<span class="n">gdf</span><span class="p">[[</span><span class="s1">&#39;osm_id&#39;</span><span class="p">,</span> <span class="s1">&#39;amenity&#39;</span><span class="p">,</span> <span class="s1">&#39;state&#39;</span><span class="p">,</span> <span class="s1">&#39;geom&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+    
+    <span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_postgis</span><span class="p">(</span>
+        <span class="sd">&quot;&quot;&quot;SELECT osm_id, amenity, state, geom FROM osm_amenities_areas&quot;&quot;&quot;</span><span class="p">,</span> 
+        <span class="n">connection</span><span class="p">,</span> <span class="n">geom_col</span><span class="o">=</span><span class="s1">&#39;geom&#39;</span><span class="p">)</span>
+
+<span class="n">gdf</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -13561,13 +13605,6 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Datenanalyse">Datenanalyse<a class="anchor-link" href="#Datenanalyse">&#182;</a></h1>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Alle-Einrichtungen-in-&#214;sterreich">Alle Einrichtungen in &#214;sterreich<a class="anchor-link" href="#Alle-Einrichtungen-in-&#214;sterreich">&#182;</a></h1>
 </div>
 </div>
@@ -13634,6 +13671,33 @@ a.anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><img src="assets/saxony_amenities.png" alt="Saxony Amenities"></p>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Datenanalyse">Datenanalyse<a class="anchor-link" href="#Datenanalyse">&#182;</a></h1>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Anzahl-der-Einrichtungen-pro-Region">Anzahl der Einrichtungen pro Region<a class="anchor-link" href="#Anzahl-der-Einrichtungen-pro-Region">&#182;</a></h1>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="k">DISTINCT</span> 
+  <span class="n">a</span><span class="p">.</span><span class="n">id</span> <span class="k">as</span> <span class="n">osm_id</span><span class="p">,</span>
+  <span class="n">b</span><span class="p">.</span><span class="n">nuts_id</span> <span class="k">AS</span> <span class="n">nuts_id</span>
+<span class="k">FROM</span> <span class="n">osm_amenities</span> <span class="n">a</span><span class="p">,</span> <span class="n">nuts</span> <span class="n">b</span>
+<span class="k">WHERE</span> <span class="n">st_within</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">geom</span><span class="p">::</span><span class="n">geometry</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="n">wkb_geometry</span><span class="p">::</span><span class="n">geometry</span><span class="p">);</span>
+</pre></div>
 
 </div>
 </div>
