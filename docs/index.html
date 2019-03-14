@@ -13382,7 +13382,10 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Overpass-API">Overpass API<a class="anchor-link" href="#Overpass-API">&#182;</a></h1>
+<h1 id="Overpass-API">Overpass API<a class="anchor-link" href="#Overpass-API">&#182;</a></h1><ul>
+<li><a href="http://overpass-turbo.eu/">overpass-turbo.eu/</a></li>
+</ul>
+
 </div>
 </div>
 </div><div class="fragment">
@@ -13732,7 +13735,7 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Was-sind-die-H&#228;ufigsten-Einrichtungen-in-Salzburg?">Was sind die H&#228;ufigsten Einrichtungen in Salzburg?<a class="anchor-link" href="#Was-sind-die-H&#228;ufigsten-Einrichtungen-in-Salzburg?">&#182;</a></h1>
+<h1 id="Was-sind-die-H&#228;ufigsten-Einrichtungen-in-Salzburg-Land?">Was sind die H&#228;ufigsten Einrichtungen in Salzburg Land?<a class="anchor-link" href="#Was-sind-die-H&#228;ufigsten-Einrichtungen-in-Salzburg-Land?">&#182;</a></h1>
 </div>
 </div>
 </div><div class="fragment">
@@ -13747,14 +13750,6 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Wittgenstein&#8217;s-Lineal">Wittgenstein&#8217;s Lineal<a class="anchor-link" href="#Wittgenstein&#8217;s-Lineal">&#182;</a></h2><p>Wenn man ein Lineal hernimmt um einen Tisch zu messen, nimmt man auch den Tisch her um das Lineal zu messen</p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="This-slide-intentionally-left-blank"><a href="https://this-page-intentionally-left-blank.org/">This slide intentionally left blank</a><a class="anchor-link" href="#This-slide-intentionally-left-blank">&#182;</a></h2>
 </div>
 </div>
@@ -13762,10 +13757,7 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Was-macht-eine-Franz&#246;sische/Deutsche-Stadt-aus?">Was macht eine Franz&#246;sische/Deutsche Stadt aus?<a class="anchor-link" href="#Was-macht-eine-Franz&#246;sische/Deutsche-Stadt-aus?">&#182;</a></h1><ul>
-<li>Oder wie man mit gängigen Data Science Methoden ein Kulturelles Modell sucht</li>
-</ul>
-
+<h1 id="Was-macht-eine-Franz&#246;sische/Deutsche-Stadt-oder-Region-aus?">Was macht eine Franz&#246;sische/Deutsche Stadt oder Region aus?<a class="anchor-link" href="#Was-macht-eine-Franz&#246;sische/Deutsche-Stadt-oder-Region-aus?">&#182;</a></h1>
 </div>
 </div>
 </div></section></section><section><section>
@@ -13802,36 +13794,22 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Neuronale-Netze">Neuronale Netze<a class="anchor-link" href="#Neuronale-Netze">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><blockquote class="twitter-tweet" data-lang="en-gb"><p lang="en" dir="ltr">It&#39;s only called a Neural Network if it comes from the Neuralè region of France. Otherwise you have to call it a logistic regression.</p>&mdash; Vicki Boykis (@vboykis) <a href="https://twitter.com/vboykis/status/1077024069126668289?ref_src=twsrc%5Etfw">24 December 2018</a></blockquote></p>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Laden-und-Vorbereitung-der-Daten">Laden und Vorbereitung der Daten<a class="anchor-link" href="#Laden-und-Vorbereitung-der-Daten">&#182;</a></h1>
 </div>
 </div>
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">psycopg2</span>
 <span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
 
 <span class="k">with</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;osm_data_science&quot;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s2">&quot;postgres&quot;</span><span class="p">,</span> 
-                      <span class="n">password</span><span class="o">=</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
-    <span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_postgis</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;SELECT * FROM city_amenity_counts&quot;&quot;&quot;</span><span class="p">,</span> 
+                      <span class="n">password</span><span class="o">=</span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+    <span class="n">gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_postgis</span><span class="p">(</span>
+            <span class="s2">&quot;SELECT * FROM city_amenity_counts&quot;</span><span class="p">,</span> 
             <span class="n">connection</span><span class="p">,</span> <span class="n">geom_col</span><span class="o">=</span><span class="s1">&#39;geom&#39;</span><span class="p">)</span>
 
 <span class="n">gdf</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;parking&#39;</span><span class="p">:</span><span class="s1">&#39;veterinary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -13847,7 +13825,7 @@ a.anchor-link {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[2]:</div>
+    <div class="prompt output_prompt">Out[1]:</div>
 
 
 
@@ -14028,7 +14006,7 @@ a.anchor-link {
 </div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get only Germany and France</span>
@@ -14050,7 +14028,7 @@ a.anchor-link {
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">gdf_DE_FR</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;parking&#39;</span><span class="p">:</span><span class="s1">&#39;veterinary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
@@ -14071,7 +14049,7 @@ a.anchor-link {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">train_test_split</span>
@@ -14094,7 +14072,7 @@ a.anchor-link {
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LogisticRegressionCV</span>
@@ -14113,7 +14091,7 @@ a.anchor-link {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[16]:</div>
+    <div class="prompt output_prompt">Out[9]:</div>
 
 
 
@@ -14133,7 +14111,7 @@ a.anchor-link {
 </div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training score : </span><span class="si">{:.4f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)))</span>
@@ -14173,7 +14151,7 @@ Testing score  : 0.8293
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">gdf</span><span class="p">[</span><span class="s1">&#39;frenchness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gdf</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">&#39;parking&#39;</span><span class="p">:</span><span class="s1">&#39;veterinary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
@@ -14283,7 +14261,10 @@ Testing score  : 0.8293
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Logistische-Regression-anhand-von-Eurostat-NUTS-Regionen">Logistische Regression anhand von Eurostat NUTS Regionen<a class="anchor-link" href="#Logistische-Regression-anhand-von-Eurostat-NUTS-Regionen">&#182;</a></h1>
+<h1 id="Logistische-Regression-anhand-von-Eurostat-NUTS-Regionen">Logistische Regression anhand von Eurostat NUTS Regionen<a class="anchor-link" href="#Logistische-Regression-anhand-von-Eurostat-NUTS-Regionen">&#182;</a></h1><ul>
+<li><a href="http://osm.janakiev.com/">osm.janakiev.com/</a></li>
+</ul>
+
 </div>
 </div>
 </div><div class="fragment">
